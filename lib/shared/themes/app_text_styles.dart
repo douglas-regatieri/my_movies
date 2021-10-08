@@ -25,8 +25,8 @@ class TextStyles {
     color: AppColors.background,
   );
   static final titleListTile = GoogleFonts.lexendDeca(
-    fontSize: 17,
-    fontWeight: FontWeight.w600,
+    fontSize: 9,
+    fontWeight: FontWeight.w400,
     color: AppColors.heading,
   );
   static final trailingRegular = GoogleFonts.lexendDeca(
