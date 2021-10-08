@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_movies/modules/favorites/favorites_page.dart';
 import 'package:my_movies/shared/themes/app_colors.dart';
 import 'package:my_movies/shared/themes/app_text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,21 +60,29 @@ class FilmeDetails extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 50, left: 60, right: 60, bottom: 60),
-                child: Container(
-                  height: 50,
-                  width: 100,
-                  color: AppColors.primary,
-                  child: TextButton(
-                      onPressed: () {
-                        favoritos(_filmeData);
-                      },
-                      child: Text("Adicionar aos Favoritos",
-                          style: TextStyles.buttonBackground)),
-                ),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //       top: 50, left: 60, right: 60, bottom: 60),
+              //   child: Container(
+              //     height: 50,
+              //     width: 100,
+              //     color: AppColors.primary,
+              //     child: TextButton(
+              //         onPressed: () {
+              //           favoritos(_filmeData);
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) =>
+              //                     FavoritesPage(_filmeData["id"].toString())),
+              //           );
+              //           print(
+              //               "filme adicionado: " + _filmeData["id"].toString());
+              //         },
+              //         child: Text("Voltar",
+              //             style: TextStyles.buttonBackground)),
+              //   ),
+              // )
             ],
           ),
         ],

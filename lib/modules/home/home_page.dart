@@ -118,17 +118,6 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-                left: 20.0,
-              ),
-              child: Text(
-                "Filmes em alta",
-                style: TextStyles.titleBoldBackground,
-              ),
-            ),
-            Divider(color: AppColors.stroke),
             Expanded(
               child: FutureBuilder(
                 future: _getSearch(),
@@ -191,47 +180,54 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _createPopList(BuildContext context, AsyncSnapshot snapshot) {
-    return GridView.builder(
-      padding: EdgeInsets.all(20.0),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        crossAxisSpacing: 10.0,
-        mainAxisSpacing: 10.0,
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 10.0,
+        left: 10.0,
+        right: 10.0,
       ),
-      itemCount: snapshot.data["results"].length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          child: Column(
-            children: [
-              Image.network(
-                "https://image.tmdb.org/t/p/w500" +
-                    snapshot.data["results"][index]["poster_path"],
-                height: 300,
-                fit: BoxFit.contain,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  bottom: 20,
-                ),
-                child: Text(
-                  snapshot.data["results"][index]["title"],
-                  style: TextStyles.buttonBoldHeading,
-                ),
-              ),
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "Filmes em alta",
+            style: TextStyles.titleBoldBackground,
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      FilmeDetails(snapshot.data["results"][index])),
-            );
-            print(snapshot.data["results"][index]);
-          },
-        );
-      },
+          Divider(color: AppColors.stroke),
+          SizedBox(
+            height: 200.0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data["results"].length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.network(
+                        "https://image.tmdb.org/t/p/w500" +
+                            snapshot.data["results"][index]["poster_path"],
+                        height: 150,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                FilmeDetails(snapshot.data["results"][index])),
+                      );
+                      print(snapshot.data["results"][index]);
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

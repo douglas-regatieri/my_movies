@@ -1,28 +1,75 @@
-class FilmeModel {
-  final int id;
-  final String title;
-  final List<int> genre;
-  final String? poster;
-  final String? backdrop;
-  final String overview;
+import 'dart:convert';
 
+class FilmeModel {
   FilmeModel({
-    required this.poster,
-    required this.id,
-    required this.title,
-    required this.genre,
-    this.backdrop,
-    required this.overview,
+    this.adult,
+    this.backdropPath,
+    this.genreIds,
+    this.id,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
   });
 
-  factory FilmeModel.fromJson(Map<String, dynamic> json) {
-    return FilmeModel(
-      id: json["id"],
-      title: json["title"],
-      genre: List<int>.from(json["genre_ids"].map((a) => a)),
-      poster: json["poster_path"],
-      backdrop: json["backdrop_path"],
-      overview: json["overview"],
-    );
-  }
+  final bool? adult;
+  final String? backdropPath;
+  final List<int>? genreIds;
+  final int? id;
+  final String? originalLanguage;
+  final String? originalTitle;
+  final String? overview;
+  final double? popularity;
+  final String? posterPath;
+  final DateTime? releaseDate;
+  final String? title;
+  final bool? video;
+  final double? voteAverage;
+  final int? voteCount;
+
+  factory FilmeModel.fromJson(String str) =>
+      FilmeModel.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory FilmeModel.fromMap(Map<String, dynamic> json) => FilmeModel(
+        adult: json["adult"],
+        backdropPath: json["backdrop_path"],
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        id: json["id"],
+        originalLanguage: json["original_language"],
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        popularity: json["popularity"].toDouble(),
+        posterPath: json["poster_path"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        title: json["title"],
+        video: json["video"],
+        voteAverage: json["vote_average"].toDouble(),
+        voteCount: json["vote_count"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "adult": adult,
+        "backdrop_path": backdropPath,
+        "genre_ids": List<dynamic>.from(genreIds!.map((x) => x)),
+        "id": id,
+        "original_language": originalLanguage,
+        "original_title": originalTitle,
+        "overview": overview,
+        "popularity": popularity,
+        "poster_path": posterPath,
+        "release_date":
+            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
+        "title": title,
+        "video": video,
+        "vote_average": voteAverage,
+        "vote_count": voteCount,
+      };
 }
