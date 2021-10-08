@@ -13,9 +13,10 @@ class SplashPage extends StatelessWidget {
     authController.currentUser(context);
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: Stack(children: [
-        Center(child: Image.asset(AppImages.popcorn)),
-      ]),
+      body: Container(
+          child: Image.asset(
+        AppImages.popcorn,
+      )),
     );
   }
 }

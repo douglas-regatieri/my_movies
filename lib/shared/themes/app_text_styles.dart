@@ -9,10 +9,15 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.heading,
   );
-  static final titleRegular = GoogleFonts.lexendDeca(
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
+  static final titleSinopse = GoogleFonts.lexendDeca(
+    fontSize: 26,
+    fontWeight: FontWeight.w600,
     color: AppColors.background,
+  );
+  static final titleRegular = GoogleFonts.lexendDeca(
+    fontSize: 26,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primary,
   );
   static final titleBoldHeading = GoogleFonts.lexendDeca(
     fontSize: 20,
@@ -21,7 +26,7 @@ class TextStyles {
   );
   static final titleBoldBackground = GoogleFonts.lexendDeca(
     fontSize: 20,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     color: AppColors.background,
   );
   static final titleListTile = GoogleFonts.lexendDeca(
@@ -32,12 +37,12 @@ class TextStyles {
   static final trailingRegular = GoogleFonts.lexendDeca(
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: AppColors.heading,
+    color: AppColors.background,
   );
   static final trailingBold = GoogleFonts.lexendDeca(
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: FontWeight.w600,
-    color: AppColors.heading,
+    color: AppColors.background,
   );
   static final buttonPrimary = GoogleFonts.inter(
     fontSize: 15,
@@ -67,7 +72,7 @@ class TextStyles {
   static final buttonBoldHeading = GoogleFonts.inter(
     fontSize: 15,
     fontWeight: FontWeight.w700,
-    color: AppColors.heading,
+    color: AppColors.background,
   );
   static final buttonBoldGray = GoogleFonts.inter(
     fontSize: 15,

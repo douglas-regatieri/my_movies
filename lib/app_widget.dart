@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'modules/favorites/favorites_page.dart';
 import 'modules/filme_details/filme_details.dart';
 import 'modules/home/home_page.dart';
 import 'modules/login/login_page.dart';
@@ -22,8 +23,8 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'My Movies',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.orange, primaryColor: AppColors.primary),
+      theme:
+          ThemeData(primarySwatch: Colors.red, primaryColor: AppColors.primary),
       initialRoute: "/login",
       routes: {
         "/splash": (context) => SplashPage(),
