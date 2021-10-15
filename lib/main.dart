@@ -1,49 +1,41 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'app_widget.dart';
+import 'package:flutter/services.dart';
+
+import 'modules/favorites/favorites_page.dart';
+import 'modules/filme_details/filme_details.dart';
+import 'modules/home/home_page.dart';
+import 'modules/login/login_page.dart';
+import 'modules/splash/splash_page.dart';
+import 'shared/models/user_model.dart';
+import 'shared/themes/app_colors.dart';
 
 void main() {
-  runApp(const AppFirebase());
+  runApp(const AppWidget());
 }
 
-class AppFirebase extends StatefulWidget {
-  const AppFirebase({Key? key}) : super(key: key);
-
-  @override
-  State<AppFirebase> createState() => _AppFirebaseState();
-}
-
-class _AppFirebaseState extends State<AppFirebase> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+class AppWidget extends StatelessWidget {
+  AppWidget() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: AppColors.primary));
+  }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return Material(
-            child: Center(
-              child: Text(
-                "Não foi possível inicializar o Firebase",
-                textDirection: TextDirection.ltr,
-              ),
+    return MaterialApp(
+      title: 'My Movies',
+      debugShowCheckedModeBanner: false,
+      theme:
+          ThemeData(primarySwatch: Colors.red, primaryColor: AppColors.primary),
+      initialRoute: "/home",
+      routes: {
+        "/splash": (context) => SplashPage(),
+        "/home": (context) => HomePage(
+              user: ModalRoute.of(context)!.settings.arguments as UserModel,
             ),
-          );
-        }
-        // Once complete, show your application
-        else if (snapshot.connectionState == ConnectionState.done) {
-          return AppWidget();
-        }
-        // Otherwise, show something whilst waiting for initialization to complete
-        else {
-          return Material(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
+        "/login": (context) => LoginPage(),
       },
     );
   }

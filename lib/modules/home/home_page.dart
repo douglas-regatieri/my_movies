@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   Future<Map> _getSearch() async {
     http.Response response;
 
-    // ignore: unnecessary_null_comparison
     if (_search == null || _search!.isEmpty) {
       response = await http.get(Uri.parse(
           "https://api.themoviedb.org/3/movie/popular?api_key=$API_KEY&language=pt-BR&page=$page"));
@@ -45,6 +44,15 @@ class _HomePageState extends State<HomePage> {
         throw Exception("Titulo não encontrado");
       }
     }
+  }
+
+  Future<Map> _getByGenre() async {
+    http.Response response;
+
+    response = await http.get(Uri.parse(
+        "https://api.themoviedb.org/3/discover/movie?api_key=$API_KEY&language=pt-BR&page=1&with_genres=28"));
+
+    return json.decode(response.body);
   }
 
   @override
@@ -146,6 +154,34 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+            Expanded(
+              child: FutureBuilder(
+                future: _getByGenre(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                    case ConnectionState.none:
+                      return Container(
+                        width: 200.0,
+                        height: 200.0,
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(AppColors.primary),
+                          strokeWidth: 5.0,
+                        ),
+                      );
+                    default:
+                      if (snapshot.hasError)
+                        return Container(
+                          child: Text("Titulo não encontrado..."),
+                        );
+                      else
+                        return _createPopList(context, snapshot);
+                  }
+                },
+              ),
+            )
           ],
         ),
         bottomNavigationBar: Container(
