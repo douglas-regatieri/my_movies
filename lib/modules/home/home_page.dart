@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyles.titleBoldBackground,
                       children: [
                         TextSpan(
-                          text: "${widget.user.name}",
+                          text: "Usuário",
                           style: TextStyles.titleBoldBackground,
                         ),
                       ],
@@ -95,8 +95,8 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(5),
-                      image: DecorationImage(
-                        image: NetworkImage(widget.user.photoURL!),
+                      //image: DecorationImage(
+                        //image: NetworkImage(widget.user.photoURL!),
                       ),
                     ),
                   )),
